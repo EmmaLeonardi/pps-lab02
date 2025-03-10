@@ -1,5 +1,7 @@
 package u02
 
+import scala.Byte.MinValue
+
 object Functions extends App{
 
   val x= 5
@@ -29,5 +31,14 @@ object Functions extends App{
   val zero: Int => Boolean = _ == 0
 
   println(genericNeg(zero)(1))
+
+  def comp(f: Int => Int, g: Int => Int): Int => Int = x=> f.apply(g(x))
+    //f compose g
+
+  println(comp(_ - 1, _ * 2)(5)) // 9
+
+  def genericComp[X,Y,Z](f: Y => Z, g: X => Y): X => Z = f compose g
+
+  //println(genericComp(_ - 1, _ * 2)(5)) // 9 //TODO: fix this es2.5
 
 }
