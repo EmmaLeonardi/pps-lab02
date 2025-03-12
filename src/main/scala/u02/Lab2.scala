@@ -1,5 +1,7 @@
 package u02
 
+import u02.Lab2.Expr.{add, evaluate, literal, multiply, show}
+
 import scala.Byte.MinValue
 import math.Integral.Implicits.infixIntegralOps
 
@@ -145,5 +147,27 @@ object Lab2 extends App {
   println(reverseNumber(1)) //1
   println(reverseNumber(0)) //0
   println(reverseNumber(-123)) //-321
+
+  //Task 4 - svolto da sola
+
+  enum Expr:
+    case literal(num: Int)
+    case add(expr: Expr, expr2: Expr)
+    case multiply(expr: Expr, expr2: Expr)
+
+  object Expr:
+    def evaluate(expr: Expr): Int = expr match
+      case Expr.literal(n) => n
+      case Expr.add(expr, expr2) => evaluate(expr) + evaluate(expr2)
+      case Expr.multiply(expr, expr2) => evaluate(expr) * evaluate(expr2)
+
+    def show(expr: Expr): String = expr match
+      case Expr.literal(n) => n.toString
+      case Expr.add(expr, expr2) => "( " + show(expr) + " + " + show(expr2) + " )"
+      case Expr.multiply(expr, expr2) => "( " + show(expr) + " * " + show(expr2) + " )"
+
+  val e = Expr.add(Expr.literal(2), Expr.multiply(Expr.literal(1), Expr.literal(3)))
+  println(evaluate(e))
+  println(show(e))
 
 }
