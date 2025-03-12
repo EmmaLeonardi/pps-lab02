@@ -94,6 +94,17 @@ object Lab2 extends App {
   val b2: (Boolean) => Boolean = !_
 
   println(genericComp(f1, f2)(5)) // 9.0
-  println(genericComp(b1,b2)(true)) //true
+  println(genericComp(b1, b2)(true)) //true
+
+  //Arbitrary functional composition of three functions
+  def composeThree[A, B, C, D](f: C => D, g: B => C, h: A => B): A => D = f compose g compose h
+
+  def t1: (String) => String = _ +"!"
+  def t2[A] : (A)=>String = _.toString()
+  def t3: (Int)=>Int = _*2
+  println(composeThree(t1, t2, t3)(3)) //6!
+  println(genericComp(t1, genericComp(t2, t3))(3)) //6!
+
+
 
 }
