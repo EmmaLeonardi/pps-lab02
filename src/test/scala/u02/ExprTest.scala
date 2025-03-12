@@ -1,4 +1,4 @@
-package task5
+package u02
 
 import org.junit.*
 import org.junit.Assert.*
