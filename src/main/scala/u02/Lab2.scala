@@ -82,7 +82,6 @@ object Lab2 extends App {
   println(p4(1, 1, 2))
 
   //Composition, f compose g
-  //TODO: Check if this is ok
   def comp(f: Int => Int, g: Int => Int): Int => Int = x => f.apply(g(x))
 
   println(comp(_ - 1, _ * 2)(5)) // 9
@@ -149,7 +148,6 @@ object Lab2 extends App {
   println(reverseNumber(-123)) //-321
 
   //Task 4 - svolto da sola
-
   enum Expr:
     case literal(num: Int)
     case add(leftExpr: Expr, rightExpr: Expr)
@@ -169,5 +167,9 @@ object Lab2 extends App {
   val e = Expr.add(Expr.literal(2), Expr.multiply(Expr.literal(1), Expr.literal(3)))
   println(evaluate(e))
   println(show(e))
+  //Altri test in u02.ExprTest
+
+  //Task 5 - svolto da sola
+  //In file task5.Optional e test in task5.OptionalTest
 
 }
