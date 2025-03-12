@@ -152,19 +152,19 @@ object Lab2 extends App {
 
   enum Expr:
     case literal(num: Int)
-    case add(expr: Expr, expr2: Expr)
-    case multiply(expr: Expr, expr2: Expr)
+    case add(leftExpr: Expr, rightExpr: Expr)
+    case multiply(leftExpr: Expr, rightExpr: Expr)
 
   object Expr:
     def evaluate(expr: Expr): Int = expr match
       case Expr.literal(n) => n
-      case Expr.add(expr, expr2) => evaluate(expr) + evaluate(expr2)
-      case Expr.multiply(expr, expr2) => evaluate(expr) * evaluate(expr2)
+      case Expr.add(leftExpr, rightExpr) => evaluate(leftExpr) + evaluate(rightExpr)
+      case Expr.multiply(leftExpr, rightExpr) => evaluate(leftExpr) * evaluate(rightExpr)
 
     def show(expr: Expr): String = expr match
       case Expr.literal(n) => n.toString
-      case Expr.add(expr, expr2) => "( " + show(expr) + " + " + show(expr2) + " )"
-      case Expr.multiply(expr, expr2) => "( " + show(expr) + " * " + show(expr2) + " )"
+      case Expr.add(leftExpr, rightExpr) => "( " + show(leftExpr) + " + " + show(rightExpr) + " )"
+      case Expr.multiply(leftExpr, rightExpr) => "( " + show(leftExpr) + " * " + show(rightExpr) + " )"
 
   val e = Expr.add(Expr.literal(2), Expr.multiply(Expr.literal(1), Expr.literal(3)))
   println(evaluate(e))
