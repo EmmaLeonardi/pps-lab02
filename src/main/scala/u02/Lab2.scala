@@ -58,7 +58,6 @@ object Lab2 extends App {
   println(genericNeg(zero)(1)) //true
   println(genericNeg(empty)("")) //false
 
-
   //Curring
   val p1: Int => Int => Int => Boolean = (x: Int) => (y: Int) => (z: Int) => (y == z) && (x <= y) //Curried lambda
   val p2: (Int, Int, Int) => Boolean = (x: Int, y: Int, z: Int) => (y == z) && (x <= y) //Un-curried lambda
@@ -99,12 +98,33 @@ object Lab2 extends App {
   //Arbitrary functional composition of three functions
   def composeThree[A, B, C, D](f: C => D, g: B => C, h: A => B): A => D = f compose g compose h
 
-  def t1: (String) => String = _ +"!"
-  def t2[A] : (A)=>String = _.toString()
-  def t3: (Int)=>Int = _*2
+  def t1: (String) => String = _ + "!"
+
+  def t2[A]: (A) => String = _.toString()
+
+  def t3: (Int) => Int = _ * 2
+
   println(composeThree(t1, t2, t3)(3)) //6!
   println(genericComp(t1, genericComp(t2, t3))(3)) //6!
 
+  //Task 3 - svolto da sola
+  //Power senza tail recursion
+  def power(base: Double, exponent: Int): Double = exponent match
+    case i if i > 0 => base * power(base, exponent - 1)
+    case 0 => 1
+    case _ => ???
 
+  println(power(2, 3)) //8.0
+  println(power(5, 2)) //25.0
 
+  def tailPower(base: Double, exponent: Int): Double =
+    @annotation.tailrec
+    def _power(base: Double, exponent: Int, acc: Double): Double = exponent match
+      case 0 => acc
+      case i if i > 0 => _power(base, exponent - 1, base * acc)
+      
+    _power(base, exponent, 1)
+
+  println(tailPower(2, 3)) //8.0
+  println(tailPower(5, 2)) //25.0
 }
