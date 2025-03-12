@@ -1,6 +1,7 @@
 package u02
 
 import scala.Byte.MinValue
+import math.Integral.Implicits.infixIntegralOps
 
 object Lab2 extends App {
 
@@ -122,9 +123,27 @@ object Lab2 extends App {
     def _power(base: Double, exponent: Int, acc: Double): Double = exponent match
       case 0 => acc
       case i if i > 0 => _power(base, exponent - 1, base * acc)
-      
+
     _power(base, exponent, 1)
 
   println(tailPower(2, 3)) //8.0
   println(tailPower(5, 2)) //25.0
+
+  //Reverse digit
+  def reverseNumber(n: Int): Int =
+    @annotation.tailrec
+    def _reverseNumber(original: Int, reversed: Int): Int =
+      val reversedNum: Int = reversed * 10 + (original % 10)
+      val leftoverNum: Int = original / 10
+      leftoverNum match
+        case 0 => reversedNum
+        case _ => _reverseNumber(leftoverNum, reversedNum)
+
+    _reverseNumber(n, 0)
+
+  println(reverseNumber(12345)) //54321
+  println(reverseNumber(1)) //1
+  println(reverseNumber(0)) //0
+  println(reverseNumber(-123)) //-321
+
 }
