@@ -2,7 +2,6 @@ package u02
 
 import org.junit.*
 import org.junit.Assert.*
-import task5.Optionals.*
 import u02.Lab2.Expr
 import u02.Lab2.Expr.{evaluate, show}
 

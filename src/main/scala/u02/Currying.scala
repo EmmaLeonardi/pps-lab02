@@ -1,8 +1,5 @@
 package u02
 
-import scala.compiletime.ops.any.==
-import scala.compiletime.ops.int.*
-
 object Currying extends App:
 
   // standard function with no currying
