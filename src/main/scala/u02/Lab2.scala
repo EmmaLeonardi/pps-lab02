@@ -2,9 +2,6 @@ package u02
 
 import u02.Lab2.Expr.{add, evaluate, literal, multiply, show}
 
-import scala.Byte.MinValue
-import math.Integral.Implicits.infixIntegralOps
-
 object Lab2 extends App {
 
 
